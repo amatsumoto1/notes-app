@@ -1,0 +1,16 @@
+.validated-input-container {
+    input {
+        box-sizing: border-box;
+        padding: 0.2rem;
+        border-radius: 4px;
+        border: 1px solid gray;
+        width: 100%;
+    }
+
+    .validated-input-error {
+        text-align: start;
+        overflow-wrap: break-word;
+        width: 100%;
+        color: red;
+    }
+}

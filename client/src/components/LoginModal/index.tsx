@@ -27,9 +27,10 @@ const LoginModal: React.VFC = () => {
     }
 
     return (
-        <Modal show={true} className='login-modal'>
+        <Modal show={false} className='login-modal'>
             <h2>Welcome to My Notes App:</h2>
             { getModalForm() }
+            <hr />
             <div className='login-modal__toggle-container'>
                 <button type='button' className='login-modal__toggle-button' onClick={toggleContents}>
                     { getButtonText() }

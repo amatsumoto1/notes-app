@@ -2,6 +2,10 @@
     width: 20rem;
     text-align: center;
 
+    &__toggle-container {
+        padding-bottom: 1rem;
+    }
+
     &__toggle-button {
         outline: none;
         border: none;

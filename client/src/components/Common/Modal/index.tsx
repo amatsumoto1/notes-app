@@ -9,6 +9,9 @@ type ModalOwnProps = {
 
 type ModalProps = React.PropsWithChildren<ModalOwnProps>;
 
+const modalNode = document.getElementById('modal-root') as HTMLElement;
+
+
 const Modal: React.FC<ModalProps> = ({ show, className, children }: ModalProps) => {
     const getModalClassName = () => {
         return `modal${className ? ` ${className}` : ''}`
@@ -17,10 +20,12 @@ const Modal: React.FC<ModalProps> = ({ show, className, children }: ModalProps) 
     return (
         show ? 
             createPortal(
-                <div className={getModalClassName()}>
-                    { children }
+                <div className='modal-overlay'>
+                    <div className={getModalClassName()} role='dialog'>
+                        { children }
+                    </div>
                 </div>,
-                document.body
+                modalNode
             ) : null
     );
 }

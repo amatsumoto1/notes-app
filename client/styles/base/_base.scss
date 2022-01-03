@@ -1,6 +1,9 @@
+@import '../variables';
+
 body {
     margin: 0;
     font-size: 16px;
+    background-color: $body-color;
 }
 
 input {

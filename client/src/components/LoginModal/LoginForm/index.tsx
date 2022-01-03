@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ValidatedInput from '../../Common/ValidatedInput';
 import './index.scss';
 
 const LoginForm = () => {
@@ -22,26 +23,22 @@ const LoginForm = () => {
     return (
         <form id='login-form' method='POST'>
             <div className='login-form__row'>
-                <input
-                    id='username'
+                <ValidatedInput
                     name='username'
-                    className='login-form__input'
                     type='text'
-                    aria-required={true}
+                    required={true}
                     placeholder='Username'
                     value={username}
                     onChange={onInputChanged}
                 />
             </div>
             <div className='login-form__row'>
-                <input
-                    id='password'
+                <ValidatedInput
                     name='password'
-                    className='login-form__input'
                     type='password'
-                    aria-required={true}
-                    autoComplete='on'
+                    required={true}
                     placeholder='Password'
+                    autoComplete='on'
                     value={password}
                     onChange={onInputChanged}
                 />

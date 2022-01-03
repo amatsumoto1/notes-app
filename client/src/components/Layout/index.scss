@@ -1,0 +1,8 @@
+.layout {
+    &__contents {
+        margin-top: 4.1rem;
+        min-height: calc(100vh - 4.1rem);
+        display: flex;
+        align-items: center;
+    }
+}

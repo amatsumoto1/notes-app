@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ValidatedInput from '../../Common/ValidatedInput';
 import './index.scss';
 
 const RegisterForm: React.VFC = () => {
@@ -26,24 +27,20 @@ const RegisterForm: React.VFC = () => {
     return (
         <form id='register-form' method='POST'>
             <div className='register-form__row'>
-                <input
-                    id='username'
+                <ValidatedInput
                     name='username'
-                    className='register-form__input'
                     type='text'
-                    aria-required={true}
+                    required={true}
                     placeholder='Username'
                     value={username}
                     onChange={onInputChanged}
                 />
             </div>
             <div className='register-form__row'>
-                <input
-                    id='password'
+                <ValidatedInput
                     name='password'
-                    className='register-form__input'
                     type='password'
-                    aria-required={true}
+                    required={true}
                     placeholder='Password'
                     autoComplete='off'
                     value={password}
@@ -51,12 +48,10 @@ const RegisterForm: React.VFC = () => {
                 />
             </div>
             <div className='register-form__row'>
-                <input
-                    id='verify-password'
+                <ValidatedInput
                     name='verify-password'
-                    className='register-form__input'
                     type='password'
-                    aria-required={true}
+                    required={true}
                     placeholder='Verify Password'
                     autoComplete='off'
                     value={verifyPassword}
