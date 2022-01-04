@@ -2,3 +2,12 @@
 $body-color: #eee;
 $modal-color: #eee;
 $modal-overlay-color: #222222ee;
+
+$clear-color: #00000000;
+
+// Helper Variables ----------------------------/
+$dark-color-list: "blue", "black", "purple";
+
+$light-color-list: "white", "green", "yellow", "orange", "red";
+
+$color-list: join($dark-color-list, $light-color-list);

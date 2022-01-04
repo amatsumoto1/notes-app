@@ -1,0 +1,16 @@
+@import '../_variables';
+
+// Color Classes ----------------------------/
+// Helper Function:
+@function is-dark-color($color) {
+    @return index($dark-color-list, $color);
+}
+
+@each $color in $color-list {
+    $is-dark: is-dark-color($color);
+
+    .#{$color} {
+        background-color: unquote($color);
+        color: if($is-dark, white, black);
+    }
+}

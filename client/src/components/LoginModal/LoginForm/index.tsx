@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import ValidatedInput from '../../Common/ValidatedInput';
+import { loginUser } from '../../../actions/User';
+import { useAppDispatch } from '../../../hooks';
 import './index.scss';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
 
     const onInputChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
@@ -20,8 +23,13 @@ const LoginForm = () => {
         }
     }
 
+    const onLoginSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch(loginUser(username, password));
+    }
+
     return (
-        <form id='login-form' method='POST'>
+        <form id='login-form' method='POST' onSubmit={onLoginSubmit}>
             <div className='login-form__row'>
                 <ValidatedInput
                     name='username'

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import ValidatedInput from '../../Common/ValidatedInput';
+import { useAppDispatch } from '../../../hooks';
+import { registerUser } from '../../../actions/User';
 import './index.scss';
 
 const RegisterForm: React.VFC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [verifyPassword, setVerifyPassword] = useState('');
+    const dispatch = useAppDispatch()
 
     const onInputChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
@@ -24,8 +27,13 @@ const RegisterForm: React.VFC = () => {
         }
     }
 
+    const onRegisterFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch(registerUser(username, password));
+    }
+
     return (
-        <form id='register-form' method='POST'>
+        <form id='register-form' method='POST' onSubmit={onRegisterFormSubmit}>
             <div className='register-form__row'>
                 <ValidatedInput
                     name='username'

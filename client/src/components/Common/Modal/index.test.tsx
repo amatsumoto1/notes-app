@@ -4,13 +4,13 @@ import { render } from '@testing-library/react';
 describe('Modal', () => {
     it('should render without crashing', () => {
         render(
-            <Modal show={true} />
+            <Modal visible={true} />
         )
     });
 
     it('should render nothing when hidden', () => {
         const { container } = render(
-            <Modal show={false} />
+            <Modal visible={false} />
         );
 
         expect(container.firstChild).toBeNull();

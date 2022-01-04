@@ -1,41 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '../Common/Modal';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import LoginModalSwitch from './LoginModalSwitch';
+import { LoginModalContents, getLoginModalVisibility, getLoginModalContents } from '../../store/LoginModal';
+import { setLoginModalContents } from '../../actions/LoginModal';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import './index.scss';
 
-enum ModalContents {
-    LoginForm,
-    RegisterForm
-}
-
 const LoginModal: React.VFC = () => {
-    const [contents, setContents] = useState(ModalContents.LoginForm);
+    const visible = useAppSelector(getLoginModalVisibility);
+    const contents = useAppSelector(getLoginModalContents);
+    const dispatch = useAppDispatch();
 
-    const getModalForm = () => {
-        return contents === ModalContents.LoginForm ? <LoginForm /> : <RegisterForm />
-    }
-
-    const getButtonText = () => {
-        return contents === ModalContents.LoginForm ?
-            'New? Create an account' :
-            'Already have an account? Log in'
-    }
+    const modalForm = contents === LoginModalContents.LoginForm ? <LoginForm /> : <RegisterForm />;
 
     const toggleContents = () => {
-        setContents(contents === ModalContents.LoginForm ? ModalContents.RegisterForm : ModalContents.LoginForm);
+        const newContents = contents === LoginModalContents.LoginForm ? LoginModalContents.RegisterForm : LoginModalContents.LoginForm;
+        dispatch(setLoginModalContents(newContents));
     }
 
     return (
-        <Modal show={false} className='login-modal'>
+        <Modal visible={visible} className='login-modal'>
             <h2>Welcome to My Notes App:</h2>
-            { getModalForm() }
-            <hr />
-            <div className='login-modal__toggle-container'>
-                <button type='button' className='login-modal__toggle-button' onClick={toggleContents}>
-                    { getButtonText() }
-                </button>
-            </div>
+            { modalForm }
+            <LoginModalSwitch contents={contents} onClick={toggleContents} />
         </Modal>
     )
 }

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import './index.scss';
 
 type ModalOwnProps = {
-    show: boolean;
+    visible: boolean;
     className?: string;
 }
 
@@ -12,13 +12,13 @@ type ModalProps = React.PropsWithChildren<ModalOwnProps>;
 const modalNode = document.getElementById('modal-root') as HTMLElement;
 
 
-const Modal: React.FC<ModalProps> = ({ show, className, children }: ModalProps) => {
+const Modal: React.FC<ModalProps> = ({ visible, className, children }: ModalProps) => {
     const getModalClassName = () => {
         return `modal${className ? ` ${className}` : ''}`
     }
     
     return (
-        show ? 
+        visible ? 
             createPortal(
                 <div className='modal-overlay'>
                     <div className={getModalClassName()} role='dialog'>
