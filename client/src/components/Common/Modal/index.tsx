@@ -25,7 +25,7 @@ const Modal: React.FC<ModalProps> = ({ visible, className, children }: ModalProp
                         { children }
                     </div>
                 </div>,
-                modalNode
+                modalNode || document.createElement('div') // For testing.
             ) : null
     );
 }
