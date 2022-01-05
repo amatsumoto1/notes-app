@@ -48,6 +48,7 @@ const SearchBar: React.VFC<Props> = ({
                 type='reset'
                 data-testid='reset-button'
                 aria-label='Reset'
+                title='reset'
                 onClick={handleClearClicked}
                 />
             }
@@ -57,6 +58,7 @@ const SearchBar: React.VFC<Props> = ({
                 type='submit'
                 data-testid='search-button'
                 aria-label='Search'
+                title='Search'
                 onClick={handleSearchClicked}
             />
         </div>
