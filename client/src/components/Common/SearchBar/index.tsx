@@ -41,14 +41,16 @@ const SearchBar: React.VFC<Props> = ({
                 value={searchInput}
                 onChange={onInputChange}
             />
-            <IconButton
+            { searchInput &&
+                <IconButton
                 icon={faTimes}
                 className='search-bar__clear-button'
                 type='reset'
                 data-testid='reset-button'
                 aria-label='Reset'
                 onClick={handleClearClicked}
-            />
+                />
+            }
             <IconButton
                 icon={faSearch}
                 className='search-bar__search-button'

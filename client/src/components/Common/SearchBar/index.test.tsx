@@ -28,10 +28,22 @@ describe('SearchBar', () => {
         expect(getByPlaceholderText(defaultPlaceholder)).toBeInTheDocument();
     });
 
-    it('should contain reset button', () => {
+    it('should not contain reset button when search is empty', () => {
         const { queryByTestId } = render(
             <SearchBar search={searchFunc} />
         );
+
+        const clearButton = queryByTestId('reset-button');
+        expect(clearButton).toBeNull();
+    });
+
+    it('should contain reset button when search has text', () => {
+        const { queryByTestId, queryByPlaceholderText } = render(
+            <SearchBar search={searchFunc} />
+        );
+        
+        const input = queryByPlaceholderText('Search') as HTMLInputElement;
+        userEvent.type(input, 'Hello World!');
 
         const clearButton = queryByTestId('reset-button');
         expect(clearButton).toBeInTheDocument();
