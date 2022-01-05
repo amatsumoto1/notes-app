@@ -50,6 +50,7 @@ const SearchBar: React.VFC<Props> = ({
                 aria-label='Reset'
                 title='reset'
                 onClick={handleClearClicked}
+                focusable
                 />
             }
             <IconButton
@@ -60,6 +61,7 @@ const SearchBar: React.VFC<Props> = ({
                 aria-label='Search'
                 title='Search'
                 onClick={handleSearchClicked}
+                focusable
             />
         </div>
     )

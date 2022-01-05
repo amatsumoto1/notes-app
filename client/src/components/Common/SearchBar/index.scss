@@ -19,14 +19,12 @@
 
     &__clear-button {
         @include no-outline-or-border();
-        background-color: $clear-color;
-        color: gray;
+        @include colored-button($body-color);
     }
 
     &__search-button {
         @include no-outline-or-border();
-        @include right-side-border-radius(5px);
-        background-color: $clear-color;
-        color: gray;
+        @include right-side-border-radius(10px);
+        @include colored-button($body-color);
     }
 }

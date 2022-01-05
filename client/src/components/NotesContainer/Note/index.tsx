@@ -21,7 +21,7 @@ const Note: React.VFC<Props> = ({ id, title, description, color, favorite } : Pr
                 {description}
             </div>
             <div className='note__button-row'>
-                <IconButton icon={faTrash} type='button' title='Delete' />
+                <IconButton icon={faTrash} type='button' title='Delete' focusable/>
             </div>
         </div>
     );

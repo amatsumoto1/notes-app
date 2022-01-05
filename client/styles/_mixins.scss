@@ -20,7 +20,6 @@ $breakpoints: (
     }
 }
 
-
 @mixin no-outline-or-border($remove-on-focus: false) {
     outline: none;
     border: none;
@@ -28,8 +27,15 @@ $breakpoints: (
     @if ($remove-on-focus) {
         &:focus {
             outline: none;
-            border: none;
         }
+    }
+}
+
+@mixin colored-button($color) {
+    background-color: $color;
+
+    &:focus {
+        background-color: darken($color, 15);
     }
 }
 

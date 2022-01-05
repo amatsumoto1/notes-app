@@ -24,6 +24,7 @@ const Header: React.VFC = () => {
                 type='button'
                 aria-label='Add Note'
                 title='Add Note'
+                tabIndex={0}
             />
             <h1 className='text-center header__title'>Notes</h1>
             <NoteSearch />
@@ -32,6 +33,7 @@ const Header: React.VFC = () => {
                 type='button'
                 aria-label='Logout'
                 onClick={onLogoutButtonClicked}
+                tabIndex={0}
             >
                 Logout
             </button>
