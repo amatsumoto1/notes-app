@@ -21,7 +21,7 @@ const SearchBar: React.VFC<Props> = ({
 
     const handleSearchClicked = (e: React.SyntheticEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        search(e.currentTarget.value);
+        search(searchInput);
     }
 
     const handleClearClicked = (e: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -45,12 +45,16 @@ const SearchBar: React.VFC<Props> = ({
                 icon={faTimes}
                 className='search-bar__clear-button'
                 type='reset'
+                data-testid='reset-button'
+                aria-label='Reset'
                 onClick={handleClearClicked}
             />
             <IconButton
                 icon={faSearch}
                 className='search-bar__search-button'
                 type='submit'
+                data-testid='search-button'
+                aria-label='Search'
                 onClick={handleSearchClicked}
             />
         </div>
