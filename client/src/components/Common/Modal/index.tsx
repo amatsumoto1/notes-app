@@ -14,7 +14,7 @@ const modalNode = document.getElementById('modal-root') as HTMLElement;
 
 const Modal: React.FC<ModalProps> = ({ visible, className, children }: ModalProps) => {
     const getModalClassName = () => {
-        return `modal${className ? ` ${className}` : ''}`
+        return `dark-shadow modal${className ? ` ${className}` : ''}`
     }
     
     return (

@@ -1,0 +1,50 @@
+@import '_variables';
+
+
+$breakpoints: (
+    mobile: $screen-size-sm-min,
+    tablet: $screen-size-md-min,
+    desktop: $screen-size-lg-min,
+    large: $screen-size-xl-min
+);
+
+@mixin breakpoint($point) {
+    @if map-has-key($breakpoints, $point) {
+        $width: map-get($breakpoints, $point);
+        @media only screen and (min-width: $width) {
+            @content;
+        }
+    }
+    @else {
+        @warn 'Invalid breakpoint: #{$point}';
+    }
+}
+
+
+@mixin no-outline-or-border($remove-on-focus: false) {
+    outline: none;
+    border: none;
+
+    @if ($remove-on-focus) {
+        &:focus {
+            outline: none;
+            border: none;
+        }
+    }
+}
+
+
+@mixin right-side-border-radius($radius) {
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+}
+
+@mixin left-size-border-radius($radius) {
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+}
+
+
+@mixin dark-shadow($blur-radius, $shadow-color: black) {
+    box-shadow: 0 2px $blur-radius $shadow-color;
+}

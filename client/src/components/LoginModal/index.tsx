@@ -21,7 +21,7 @@ const LoginModal: React.VFC = () => {
     }
 
     return (
-        <Modal visible={visible} className='login-modal'>
+        <Modal visible={visible} className='text-center login-modal'>
             <h2>Welcome to My Notes App:</h2>
             { modalForm }
             <LoginModalSwitch contents={contents} onClick={toggleContents} />

@@ -12,7 +12,7 @@ const Header: React.VFC = () => {
 
     return (
         <header className='header'>
-            <h1 className='header__title'>Notes</h1>
+            <h1 className='text-center header__title'>Notes</h1>
             <button type='button' className='header__logout-button' onClick={onLogoutButtonClicked}>
                 Logout
             </button>

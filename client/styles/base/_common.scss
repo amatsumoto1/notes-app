@@ -1,0 +1,33 @@
+@import '../_variables';
+@import '../mixins';
+
+// Basic Classes -------------------------------/
+.text-center {
+    text-align: center;
+}
+
+.dark-shadow {
+    @include dark-shadow(10px);
+}
+
+// Helper Variables ----------------------------/
+$dark-color-list: "blue", "black", "purple";
+
+$light-color-list: "white", "green", "yellow", "orange", "red";
+
+$color-list: join($dark-color-list, $light-color-list);
+
+// Color Classes ----------------------------/
+// Helper Function:
+@function is-dark-color($color) {
+    @return index($dark-color-list, $color);
+}
+
+@each $color in $color-list {
+    $is-dark: is-dark-color($color);
+
+    .#{$color} {
+        background-color: unquote($color);
+        color: if($is-dark, white, black);
+    }
+}

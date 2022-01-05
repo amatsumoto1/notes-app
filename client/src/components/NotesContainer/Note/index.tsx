@@ -1,4 +1,6 @@
 import React from 'react';
+import IconButton from '../../Common/IconButton';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 
 type Props = {
@@ -11,12 +13,15 @@ type Props = {
 
 const Note: React.VFC<Props> = ({ id, title, description, color, favorite } : Props) => {
     return (
-        <div className={`note ${color}`}>
-            <h2 className='note__title'>
+        <div className={`dark-shadow ${color} note`}>
+            <h2 className='text-center note__title'>
                 {title}
             </h2>
             <div className='note__description'>
                 {description}
+            </div>
+            <div className='note__button-row'>
+                <IconButton icon={faTrash} type='button'/>
             </div>
         </div>
     );
