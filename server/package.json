@@ -1,0 +1,38 @@
+{
+  "name": "ntes-server",
+  "version": "1.0.0",
+  "description": "Notes Web App Server created with Express",
+  "author": "Andrew Matsumoto",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsc",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/node": "^17.0.8",
+    "@types/pg-promise": "^5.4.3",
+    "@types/sequelize": "^4.28.11",
+    "@types/supertest": "^2.0.11",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "pg-promise": "^10.11.1",
+    "sequelize": "^6.12.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}
