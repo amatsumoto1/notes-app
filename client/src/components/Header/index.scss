@@ -3,6 +3,7 @@
 
 .header {
     @include dark-shadow(5px);
+    background-color: $body-color;
     position: fixed;
     top: 0;
     width: 100%;

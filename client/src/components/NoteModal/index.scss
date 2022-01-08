@@ -1,0 +1,15 @@
+@import '../../../styles/mixins';
+
+.note-modal {
+    width: 40rem;
+    margin-top: 10rem;
+
+    &__button-row {
+        display: flex;
+        justify-content: space-between;
+
+        & > button {
+            @include no-outline-or-border(true);
+        }
+    }
+}

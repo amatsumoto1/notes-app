@@ -5,6 +5,7 @@ import IconButton from '../Common/IconButton';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '../../hooks';
 import { logoutUser } from '../../actions/User';
+import { setNewModalNote } from '../../actions/NoteModal';
 import './index.scss';
 
 const Header: React.VFC = () => {
@@ -12,6 +13,10 @@ const Header: React.VFC = () => {
     
     const onLogoutButtonClicked = () => {
         dispatch(logoutUser());
+    }
+
+    const onAddNoteButtonClicked = () => {
+        dispatch(setNewModalNote());
     }
 
     return (
@@ -24,6 +29,7 @@ const Header: React.VFC = () => {
                 type='button'
                 aria-label='Add Note'
                 title='Add Note'
+                onClick={onAddNoteButtonClicked}
                 tabIndex={0}
             />
             <h1 className='text-center header__title'>Notes</h1>

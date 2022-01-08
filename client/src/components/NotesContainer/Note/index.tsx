@@ -1,6 +1,6 @@
 import React from 'react';
 import IconButton from '../../Common/IconButton';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 
 type Props = {
@@ -8,12 +8,31 @@ type Props = {
     title?: string,
     description?: string,
     color?: string,
-    favorite?: boolean
+    favorite?: boolean,
+    startEdit: (id: number) => void,
+    remove: (id: number) => void
 }
 
-const Note: React.VFC<Props> = ({ id, title, description, color, favorite } : Props) => {
+const Note: React.VFC<Props> = ({
+        id,
+        title,
+        description,
+        color = 'white',
+        favorite,
+        startEdit,
+        remove 
+    } : Props) => {
+
+    const onEditButtonClicked = () => {
+        startEdit(id);
+    }
+
+    const onDeleteButtonClicked = () => {
+        remove(id);
+    }
+
     return (
-        <div className={`dark-shadow ${color} note`}>
+        <div className={`dark-shadow note ${color}`}>
             <h2 className='text-center note__title'>
                 {title}
             </h2>
@@ -21,7 +40,22 @@ const Note: React.VFC<Props> = ({ id, title, description, color, favorite } : Pr
                 {description}
             </div>
             <div className='note__button-row'>
-                <IconButton icon={faTrash} type='button' title='Delete' focusable/>
+                <IconButton
+                    icon={faTrash}
+                    type='button'
+                    aria-label='Delete'
+                    title='Delete'
+                    focusable
+                    onClick={onDeleteButtonClicked}
+                />
+                <IconButton
+                    icon={faEdit}
+                    type='button'
+                    aria-label='Edit'
+                    title='Edit'
+                    focusable
+                    onClick={onEditButtonClicked}
+                />
             </div>
         </div>
     );

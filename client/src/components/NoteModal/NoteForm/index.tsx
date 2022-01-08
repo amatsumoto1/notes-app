@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
+import AutoResizeTextArea from '../../Common/AutoResizeTextArea';
 import './index.scss';
 
 type Props = {
     defaultTitle?: string,
     defaultContent?: string,
-    defaultColor?: string,
-    id?: number
+    onUpdate: (title?: string, contents?: string) => void
 }
 
 const NoteForm: React.VFC<Props> = ({
         defaultTitle,
         defaultContent,
-        defaultColor
+        onUpdate
     }: Props) => {
     const [title, setTitle] = useState(defaultTitle);
     const [content, setContent] = useState(defaultContent);
-    const [color, setColor] = useState(defaultColor)
     
     const onTitleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value);
@@ -23,6 +22,10 @@ const NoteForm: React.VFC<Props> = ({
 
     const onContentChange = (e: React.SyntheticEvent<HTMLTextAreaElement>) => {
         setContent(e.currentTarget.value);
+    }
+
+    const onInputBlur = () => {
+        onUpdate(title, content);
     }
 
     return (
@@ -34,13 +37,15 @@ const NoteForm: React.VFC<Props> = ({
                 placeholder='Title'
                 value={title}
                 onChange={onTitleChange}
+                onBlur={onInputBlur}
             />
-            <textarea
+            <AutoResizeTextArea
                 className='note-form__content'
                 name='content'
                 placeholder='Content'
                 value={content}
                 onChange={onContentChange}
+                onBlur={onInputBlur}
             />
         </div>
     );
