@@ -6,7 +6,7 @@ export const client = new Axios({
     baseURL: 'http://localhost:8080/',
     headers: { 'Content-Type': 'application/json' },
     transformRequest: (data) => JSON.stringify(data),
-    transformResponse: (data) => JSON.parse(data)
+    transformResponse: (data) => JSON.parse(data || '{}')
 });
 
 client.interceptors.request.use((request) => {

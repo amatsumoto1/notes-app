@@ -5,7 +5,7 @@ import './index.scss';
 type Props = {
     defaultTitle?: string,
     defaultContent?: string,
-    onUpdate: (title?: string, contents?: string) => void
+    onUpdate: (title?: string, content?: string) => void
 }
 
 const NoteForm: React.VFC<Props> = ({

@@ -25,7 +25,7 @@ export const UserController = {
                 password: hashedPassword
             });
 
-            return res.sendStatus(HttpCodes.Created);
+            return res.status(HttpCodes.Created).send({message: 'Created'});
         }
         catch (err) {
             return res.sendStatus(HttpCodes.BadRequest);

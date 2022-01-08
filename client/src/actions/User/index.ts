@@ -49,7 +49,22 @@ export const logoutUser = () : AppThunk => {
 }
 
 export const registerUser = (username: string, password: string): AppThunk => {
-    return (dispatch, getState) => {
-        dispatch(setLoginModalContents(LoginModalContents.LoginForm));
+    return async (dispatch, getState) => {
+        try {
+            const res = await client.post('/user/register', {
+                username: username,
+                password: password
+            });
+
+            if (res.status === 201) {
+                dispatch(setLoginModalContents(LoginModalContents.LoginForm));
+            }
+            else if (res.status === 409) {
+                dispatch(setServerError('Username is already in use'));
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }

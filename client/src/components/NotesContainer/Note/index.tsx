@@ -6,7 +6,7 @@ import './index.scss';
 type Props = {
     id: number,
     title?: string,
-    description?: string,
+    content?: string,
     color?: string,
     favorite?: boolean,
     startEdit: (id: number) => void,
@@ -16,7 +16,7 @@ type Props = {
 const Note: React.VFC<Props> = ({
         id,
         title,
-        description,
+        content,
         color = 'white',
         favorite,
         startEdit,
@@ -36,8 +36,8 @@ const Note: React.VFC<Props> = ({
             <h2 className='text-center note__title'>
                 {title}
             </h2>
-            <div className='note__description'>
-                {description}
+            <div className='note__content'>
+                {content}
             </div>
             <div className='note__button-row'>
                 <IconButton

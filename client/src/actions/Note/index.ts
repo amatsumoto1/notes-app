@@ -1,15 +1,30 @@
 import { AppThunk } from '../../store';
 import { NoteModel, setAll, add, update, remove } from '../../store/Notes';
-
+import { client } from '../../config/client';
 
 export const loadNotes = (): AppThunk => {
-    return (dispatch, getState) => {
-        dispatch(setAll({}));
+    return async (dispatch, getState) => {
+        try {
+            const res = await client.get('/notes');
+            if (res.status === 200) {
+                const noteList = res.data.notes as NoteModel[];
+                const noteState: {[id: number]: NoteModel} = {};
+
+                for (const note of noteList) {
+                    noteState[note.id] = note;
+                }
+
+                dispatch(setAll(noteState));
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }    
     }
 }
 
 export const addNote = (note: NoteModel): AppThunk => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         dispatch(add(note));
     }
 }
@@ -30,7 +45,15 @@ export const setNoteColor = (id: number, color?: string): AppThunk => {
 }
 
 export const removeNote = (id: number): AppThunk => {
-    return (dispatch, getState) => {
-        dispatch(remove(id));
+    return async (dispatch, getState) => {
+        try {
+            const res = await client.delete(`/notes/${id}`);
+            if (res.status === 204) {
+                dispatch(remove(id));
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }

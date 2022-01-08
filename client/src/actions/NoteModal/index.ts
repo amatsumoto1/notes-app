@@ -1,9 +1,7 @@
 import { AppThunk } from '../../store';
 import { setVisible, setNote, clearNote, updateNote, setIsNew } from '../../store/NoteModal';
 import { NoteModel } from '../../store/Notes';
-
-let nextId = 2; // Temporary, remove when backend integrated.
-
+import { client } from '../../config/client';
 
 export const setNoteModalVisible = (visible: boolean): AppThunk => {
     return (dispatch, getState) => {
@@ -15,21 +13,29 @@ export const setNoteModalNote = (noteId: number): AppThunk => {
     return (dispatch, getState) => {
         const state = getState();
         const note = state.notes.notes[noteId];
+        
         dispatch(setIsNew(false));
-        dispatch(setNote(note));
         dispatch(setNoteModalVisible(true));
+        dispatch(setNote(note));
     }
 }
 
 export const setNewModalNote = (): AppThunk => {
-    return (dispatch, getState) => {
-        const note: NoteModel = {
-            id: nextId++,
+    return async (dispatch, getState) => {
+        try {
+            const res = await client.post('/notes', {})
+            if (res.status === 201) {
+                const note = res.data.note as NoteModel;
+                
+                dispatch(setNoteModalVisible(true));
+                dispatch(setIsNew(true));
+                dispatch(setNote(note));
+                
+            }
         }
-
-        dispatch(setIsNew(true));
-        dispatch(setNote(note));
-        dispatch(setNoteModalVisible(true));
+        catch (err) {
+            console.log(err);
+        }
     }
 }
 

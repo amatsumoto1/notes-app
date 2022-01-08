@@ -22,7 +22,7 @@ export const UserModel = sequelize.define<UserInstance>(
             autoIncrement: true,
             type: DataTypes.NUMBER,
             primaryKey: true,
-            unique: true,
+            unique: true
         },
         username: {
             allowNull: false,

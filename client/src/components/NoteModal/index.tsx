@@ -19,7 +19,7 @@ const NoteModal: React.VFC = () => {
         dispatch(setNoteModalVisible(false));
     }
 
-    const updateNoteContents = (title?: string, contents?: string) => {
+    const updateNoteContents = (title?: string, content?: string) => {
         if (!note) {
             return;
         }
@@ -27,31 +27,34 @@ const NoteModal: React.VFC = () => {
         const updatedNote: NoteModel = {
             ...note,
             title: title,
-            description: contents
+            content: content
         }
 
         dispatch(updateNoteModalNote(updatedNote));
     }
 
     useEffect(() => {
-        if (!visible) {
-            if (note) {
-                if (!isNew) {
-                    dispatch(updateNote(note));
-                }
-                else {
-                    dispatch(addNote(note));
-                }
+        if (!visible && note) {
+            if (!isNew) {
+                dispatch(updateNote(note));
             }
-            dispatch(clearNoteModalNote());
+            else {
+                dispatch(addNote(note));
+            }
         }
     }, [visible, isNew, note, dispatch]);
+
+    useEffect(() => {
+        if (!visible) {
+            dispatch(clearNoteModalNote()); 
+        }
+    }, [visible, dispatch]);
 
     return (
         <Modal className='note-modal' visible={visible}>
             <NoteForm
                 defaultTitle={note?.title}
-                defaultContent={note?.description}
+                defaultContent={note?.content}
                 onUpdate={updateNoteContents}
             />
             <div className='note-modal__button-row'>

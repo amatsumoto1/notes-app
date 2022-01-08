@@ -4,7 +4,7 @@ import { RootState } from '..';
 export interface NoteModel {
     id: number;
     title?: string;
-    description?: string;
+    content?: string;
     color?: string;
     favorite?: boolean;
 }
@@ -14,15 +14,7 @@ export interface NotesState {
 }
 
 const initialState: NotesState = {
-    notes: {
-        1 : {
-            id: 1,
-            title: 'testTitle',
-            description: 'test description',
-            color: 'red',
-            favorite: true
-        }
-    }
+    notes: {}
 }
 
 const noteSlice = createSlice({
