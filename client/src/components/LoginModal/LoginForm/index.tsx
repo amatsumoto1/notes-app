@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ValidatedInput from '../../Common/ValidatedInput';
 import { loginUser } from '../../../actions/User';
-import { useAppDispatch } from '../../../hooks';
+import { clearLoginModalError } from '../../../actions/LoginModal';
+import { getLoginModalServerError } from '../../../store/LoginModal';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import './index.scss';
 
 const LoginForm = () => {
+    const serverError = useAppSelector(getLoginModalServerError);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+    const [passwordError, setPasswordError] = useState(serverError);
     const dispatch = useAppDispatch();
 
     const onInputChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -23,10 +28,43 @@ const LoginForm = () => {
         }
     }
 
+    const validateUsername = (): boolean => {
+        if (!username) {
+            setUsernameError('Username is required');
+            return false;
+        }
+        return true;
+    }
+
+    const validatePassword = (): boolean => {
+        if (!password) {
+            setPasswordError('Password is required');
+            return false;
+        }
+        return true;
+    }
+
+    const clearInputErrors = () => {
+        dispatch(clearLoginModalError());
+        setUsernameError('');
+        setPasswordError('');
+    }
+
     const onLoginSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(loginUser(username, password));
+        
+        clearInputErrors();
+
+        if (validateUsername() && validatePassword()) {
+            dispatch(loginUser(username, password));
+        }
     }
+
+    useEffect(() => {
+        if (serverError) {
+            setPasswordError(serverError);
+        }
+    }, [serverError])
 
     return (
         <form id='login-form' method='POST' onSubmit={onLoginSubmit}>
@@ -38,6 +76,7 @@ const LoginForm = () => {
                     placeholder='Username'
                     value={username}
                     onChange={onInputChanged}
+                    error={usernameError}
                 />
             </div>
             <div className='login-form__row'>
@@ -49,6 +88,7 @@ const LoginForm = () => {
                     autoComplete='on'
                     value={password}
                     onChange={onInputChanged}
+                    error={passwordError}
                 />
             </div>
             <div className='login-form__row'>

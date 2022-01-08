@@ -1,14 +1,65 @@
 import { UserModel } from '../models/user';
 import { Request, Response } from 'express';
 import { HttpCodes } from '../constants/codes';
+import { hashSync, compareSync } from 'bcrypt';
+import jwt, { sign } from 'jsonwebtoken';
 
 export const UserController = {
-    register: (req: Request, res: Response): Response => {
+    register: async (req: Request, res: Response): Promise<Response> => {
         const { username, password } = req.body;
+
         if (!username || !password) {
-            return res.status(HttpCodes.BadRequest);
+            return res.sendStatus(HttpCodes.BadRequest);
         }
 
-        return res.status(HttpCodes.Created);
+        try {
+
+            const user = await UserModel.findOne({ where: { username: username }});
+            if (user) {
+                return res.sendStatus(HttpCodes.Conflict);
+            }
+            const hashedPassword = hashSync(password, 10);
+
+            await UserModel.create({
+                username: username,
+                password: hashedPassword
+            });
+
+            return res.sendStatus(HttpCodes.Created);
+        }
+        catch (err) {
+            return res.sendStatus(HttpCodes.BadRequest);
+        }
+    },
+    login: async (req: Request, res: Response): Promise<Response> => {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.sendStatus(HttpCodes.BadRequest);
+        }
+
+        const user = await UserModel.findOne({ where: { username: username }});
+        if (!user) {
+            return res.sendStatus(HttpCodes.BadRequest);
+        }
+
+        if (await compareSync(password, user.password)) {
+            const token = sign({
+                userId: user.id,
+                username
+            }, 'testverifytokensecret', {
+                expiresIn: '2h'
+            });
+
+            return res.status(HttpCodes.Ok).send({
+                username: username,
+                token: token
+            });
+        }
+
+        return res.sendStatus(HttpCodes.BadRequest);
+    },
+    logout: (req: Request, res: Response): Response => {
+        return res.status(HttpCodes.Ok).send({message: 'logged out.'});
     }
 }

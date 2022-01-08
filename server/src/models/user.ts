@@ -10,8 +10,8 @@ interface UserAttributes {
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 export interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {
-    createdOn?: Date;
-    updatedOn?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export const UserModel = sequelize.define<UserInstance>(
@@ -31,7 +31,7 @@ export const UserModel = sequelize.define<UserInstance>(
         },
         password: {
             allowNull: false,
-            type: DataTypes.STRING,
+            type: DataTypes.STRING
         }
     }
 );

@@ -3,14 +3,15 @@ import Modal from '../Common/Modal';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import LoginModalSwitch from './LoginModalSwitch';
-import { LoginModalContents, getLoginModalVisibility, getLoginModalContents } from '../../store/LoginModal';
+import { LoginModalContents, getLoginModalContents } from '../../store/LoginModal';
+import { isLoggedIn } from '../../store/User';
 import { setLoginModalContents } from '../../actions/LoginModal';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import './index.scss';
 
 const LoginModal: React.VFC = () => {
-    const visible = useAppSelector(getLoginModalVisibility);
     const contents = useAppSelector(getLoginModalContents);
+    const isLoggedin = useAppSelector(isLoggedIn);
     const dispatch = useAppDispatch();
 
     const modalForm = contents === LoginModalContents.LoginForm ? <LoginForm /> : <RegisterForm />;
@@ -21,7 +22,7 @@ const LoginModal: React.VFC = () => {
     }
 
     return (
-        <Modal visible={visible} className='text-center login-modal'>
+        <Modal visible={!isLoggedin} className='text-center login-modal'>
             <h2>Welcome to My Notes App:</h2>
             { modalForm }
             <LoginModalSwitch contents={contents} onClick={toggleContents} />

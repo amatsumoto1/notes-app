@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import loginModalReducer from './LoginModal';
 import notesReducer from './Notes';
 import noteModalReducer from './NoteModal';
+import userReducer from './User';
 
 export const store = configureStore({
   reducer: {
     loginModal: loginModalReducer,
     notes: notesReducer,
-    noteModal: noteModalReducer
+    noteModal: noteModalReducer,
+    user: userReducer
   },
 });
 

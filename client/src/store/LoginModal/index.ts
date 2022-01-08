@@ -7,12 +7,11 @@ export enum LoginModalContents {
 }
 
 export interface LoginModalState {
-    visible: boolean;
     contents: LoginModalContents;
+    serverError?: string;
 }
 
 const initialState: LoginModalState = {
-    visible: false,
     contents: LoginModalContents.LoginForm
 };
 
@@ -20,17 +19,20 @@ const loginModalSlice = createSlice({
     name: 'loginModal',
     initialState: initialState,
     reducers: {
-        setVisible: (state: LoginModalState, action: PayloadAction<boolean>) => {
-            state.visible = action.payload;
-        },
         setContents: (state: LoginModalState, action: PayloadAction<LoginModalContents>) => {
             state.contents = action.payload;
+        },
+        setServerError: (state: LoginModalState, action: PayloadAction<string>) => {
+            state.serverError = action.payload;
+        },
+        clearServerError: (state: LoginModalState, action: PayloadAction) => {
+            state.serverError = undefined;
         }
     }
 });
 
-export const getLoginModalVisibility = (state: RootState) => state.loginModal.visible;
 export const getLoginModalContents = (state: RootState) => state.loginModal.contents;
+export const getLoginModalServerError = (state: RootState) => state.loginModal.serverError;
 
-export const { setVisible, setContents } = loginModalSlice.actions;
+export const { setContents, setServerError, clearServerError } = loginModalSlice.actions;
 export default loginModalSlice.reducer;

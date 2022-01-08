@@ -36,7 +36,6 @@ export const ValidatedInput: React.FC<ValidatedInputProps> = (props: ValidatedIn
                     value={value}
                     placeholder={placeholder}
                     autoComplete={autoComplete}
-                    required={required}
                     aria-required={required}
                     aria-invalid={error ? true : undefined}
                     aria-describedby={error ? errorSectionId: undefined }
