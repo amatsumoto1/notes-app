@@ -1,5 +1,5 @@
 import SearchBar from '.';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('SearchBar', () => {
@@ -86,5 +86,5 @@ describe('SearchBar', () => {
         userEvent.click(searchButton);
 
         expect(searchFunc).toBeCalledWith('Hello World!');
-    })
+    });
 });

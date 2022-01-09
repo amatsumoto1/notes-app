@@ -3,12 +3,14 @@ import loginModalReducer from './LoginModal';
 import notesReducer from './Notes';
 import noteModalReducer from './NoteModal';
 import userReducer from './User';
+import tagModalReducer from './TagModal';
 
 export const store = configureStore({
   reducer: {
     loginModal: loginModalReducer,
     notes: notesReducer,
     noteModal: noteModalReducer,
+    tagModal: tagModalReducer,
     user: userReducer
   },
 });

@@ -19,6 +19,13 @@ const SearchBar: React.VFC<Props> = ({
         setSearchInput(e.currentTarget.value);
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            setSearchInput(e.currentTarget.value);
+        }
+    }
+
     const handleSearchClicked = (e: React.SyntheticEvent<HTMLButtonElement>) => {
         e.preventDefault();
         search(searchInput);
@@ -40,6 +47,7 @@ const SearchBar: React.VFC<Props> = ({
                 placeholder={placeholder}
                 value={searchInput}
                 onChange={onInputChange}
+                onKeyPress={handleKeyPress}
             />
             { searchInput &&
                 <IconButton

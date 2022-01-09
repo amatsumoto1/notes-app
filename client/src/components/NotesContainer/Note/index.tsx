@@ -36,9 +36,9 @@ const Note: React.VFC<Props> = ({
             <h2 className='text-center note__title'>
                 {title}
             </h2>
-            <div className='note__content'>
+            <pre className='note__content'>
                 {content}
-            </div>
+            </pre>
             <div className='note__button-row'>
                 <IconButton
                     icon={faTrash}

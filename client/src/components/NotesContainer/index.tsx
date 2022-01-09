@@ -1,6 +1,7 @@
 import React from 'react';
 import NoteTable from './NoteTable';
 import NoteModal from '../NoteModal';
+import TagModal from '../TagModal';
 import './index.scss';
 
 const NoteContainer: React.VFC = () => {
@@ -8,6 +9,7 @@ const NoteContainer: React.VFC = () => {
         <div className='notes-container'>
             <NoteTable />
             <NoteModal />
+            <TagModal />
         </div>
     );
 }

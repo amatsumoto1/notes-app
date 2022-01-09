@@ -13,7 +13,7 @@ import './index.scss';
 
 
 const NoteModal: React.VFC = () => {
-    const [showColorPicker, setShowColorPicker] = useState(true);
+    const [showColorPicker, setShowColorPicker] = useState(false);
     const note = useAppSelector(getNoteModalNote);
     const visible = useAppSelector(getNoteModalVisibility);
     const isNew = useAppSelector(getIsNoteModalNoteNew);

@@ -4,7 +4,7 @@ import './index.scss';
 type ValidatedInputProps = {
     name: string;
     type?: string;
-    value: string;
+    value?: string;
     placeholder?: string;
     autoComplete?: string;
     required?: boolean;
