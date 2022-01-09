@@ -1,0 +1,28 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/variables';
+
+.color-picker {
+    @include dark-shadow(5px);
+    list-style: none;
+    display: flex;
+    background-color: $modal-color;
+    border-radius: 10px;
+    z-index: 400;
+    margin: 0;
+    padding-inline-start: 0;
+
+    &__color-wrapper {
+        margin: 0.2rem;
+    }
+
+    &__button {
+        border: 1px solid gray;
+        height: 1.4rem;
+        width: 1.4rem;
+        border-radius: 50%;
+
+        &--active {
+            border: 2px solid lime;
+        }
+    }
+}

@@ -40,8 +40,17 @@ export const setNewModalNote = (): AppThunk => {
 }
 
 export const updateNoteModalNote = (note: NoteModel): AppThunk => {
-    return (dispatch, getState) => {
-        dispatch(updateNote(note));
+    return async (dispatch, getState) => {
+        try {
+            const res = await client.put(`/notes/${note.id}`, note)
+            if (res.status === 200 || res.status === 201) {
+                const note = res.data.note as NoteModel;
+                dispatch(updateNote(note));
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }
 

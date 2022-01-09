@@ -21,7 +21,7 @@ const mapToViewModel = (note: NoteInstance): NoteViewModel => {
 }
 
 export const NotesController = {
-    getAllNotes: async (req: Request, res: Response) => {
+    getAllNotes: async (req: Request, res: Response): Promise<Response> => {
         const userId = req.user!.userId;
         try {
             const notes = await NoteModel.findAll({ where: { userId: userId }});
@@ -33,7 +33,7 @@ export const NotesController = {
             return res.sendStatus(HttpCodes.BadRequest);
         }
     },
-    createNote: async (req: Request, res: Response) => {
+    createNote: async (req: Request, res: Response): Promise<Response> => {
         const userId = req.user!.userId;
         try {
             const { title, content, color, favorite } = req.body;
@@ -42,7 +42,7 @@ export const NotesController = {
                 content: content,
                 color: color,
                 userId: userId,
-                favorite: favorite || false
+                favorite: !!favorite
             });
 
             const viewModel = mapToViewModel(createdNote);
@@ -53,7 +53,48 @@ export const NotesController = {
             return res.sendStatus(HttpCodes.BadRequest);
         }
     },
-    deleteNote: async (req: Request, res: Response) => {
+    updateNote: async (req: Request, res: Response): Promise<Response> => {
+        const userId = req.user!.userId;
+        try {
+            const {
+                id,
+                title,
+                content,
+                color,
+                favorite,
+            } = req.body;
+
+            const currentNote = await NoteModel.findByPk(id);
+            if (currentNote) {
+                const updatedNote = await currentNote.update({
+                    id: id,
+                    title: title,
+                    content: content,
+                    color: color,
+                    favorite: !!favorite,
+                    userId: userId
+                });
+                const viewModel = mapToViewModel(updatedNote);
+                return res.status(HttpCodes.Ok).send({ note: viewModel });
+            }
+            else {
+                const createdNote = await NoteModel.create({
+                    id: id,
+                    title: title,
+                    content: content,
+                    color: color,
+                    favorite: !!favorite,
+                    userId: userId
+                });
+                const viewModel = mapToViewModel(createdNote);
+                return res.status(HttpCodes.Created).send({ note: viewModel });
+            }
+        }
+        catch (err) {
+            return res.sendStatus(HttpCodes.BadRequest);
+        }
+    },
+    deleteNote: async (req: Request, res: Response): Promise<Response> => {
         const userId = req.user!.userId;
         try {
             const id = req.params.id;

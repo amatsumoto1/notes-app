@@ -7,6 +7,7 @@ export const getNoteRoutes = () => {
 
     router.get('/', verifyToken, NotesController.getAllNotes);
     router.post('/', verifyToken, NotesController.createNote);
+    router.put('/:id', verifyToken, NotesController.updateNote);
     router.delete('/:id', verifyToken, NotesController.deleteNote);
 
     return router;

@@ -1,8 +1,10 @@
 @import '../../../styles/mixins';
+@import '../../../styles/variables';
 
 .note-modal {
     width: 40rem;
-    margin-top: 10rem;
+    position: absolute;
+    top: 10rem;
 
     &__button-row {
         display: flex;
@@ -10,6 +12,12 @@
 
         & > button {
             @include no-outline-or-border(true);
+            background-color: $clear-color;
+            color: inherit;
         }
+    }
+
+    &__color-picker {
+        position: absolute;
     }
 }

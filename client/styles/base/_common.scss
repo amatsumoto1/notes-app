@@ -25,9 +25,13 @@ $color-list: join($dark-color-list, $light-color-list);
 
 @each $color in $color-list {
     $is-dark: is-dark-color($color);
+    $foreground-color: if($is-dark, white, black);
 
     .#{$color} {
-        background-color: unquote($color);
-        color: if($is-dark, white, black);
+        background-color: unquote($color) !important; // Currently utility class that should override all others. May refactor later.
+        color: $foreground-color !important;
+        &::placeholder {
+            color: if($is-dark, darken(white, 20%), lighten(black, 20%)) !important;
+        }
     }
 }
