@@ -3,6 +3,7 @@ import Modal from '../Common/Modal';
 import { getTagModalVisibility } from '../../store/TagModal';
 import { setTagModalVisibility } from '../../actions/TagModal';
 import TagSearch from './TagSearch';
+import TagTable from './TagTable';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import './index.scss';
 
@@ -18,6 +19,9 @@ const TagModal: React.VFC = () => {
         <Modal className='tag-modal' visible={visible}>
             <div className='tag-modal__row'>
                 <TagSearch />
+            </div>
+            <div className='tag-modal__row'>
+                <TagTable />
             </div>
             <div className='tag-modal__row'>
                 <button

@@ -1,0 +1,35 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.options-dropdown {
+    @include dark-shadow(10px);
+    position: absolute;
+    list-style: none;
+    top: 2.1rem;
+    padding-inline-start: 0;
+    z-index: 11;
+    background-color: $modal-color;
+    border-radius: 5px;
+    line-height: normal;
+
+    & > li {
+        display: block;
+        
+        &:first-child {
+            @include top-border-radius(5px);
+        }
+
+        &:last-child {
+            @include bottom-border-radius(5px);
+        }
+    }
+
+    &__option {
+        @include no-outline-or-border();
+        @include colored-button($modal-color);
+        text-align: left;
+        width: 100%;
+        padding: 0.1rem 0.4rem;
+        border-radius: inherit;
+    }
+}

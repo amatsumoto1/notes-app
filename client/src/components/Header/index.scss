@@ -30,6 +30,18 @@
         margin: 0;
     }
 
+    &__options-wrapper {
+        display: inherit;
+    }
+
+    &__options-button {
+        @include no-outline-or-border();
+        @include colored-button($body-color);
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+
     &__logout-button {
         @include no-outline-or-border();
         @include colored-button(red);

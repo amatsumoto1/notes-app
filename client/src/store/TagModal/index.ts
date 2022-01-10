@@ -6,7 +6,7 @@ interface TagModalState {
 }
 
 const initialState: TagModalState = {
-    visible: true
+    visible: false
 }
 
 const tagModalSlice = (createSlice({

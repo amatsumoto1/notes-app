@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NoteSearch from './NoteSearch';
 import Logo from './Logo';
 import IconButton from '../Common/IconButton';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import OptionsDrowdown from './OptionsDropdown';
+import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '../../hooks';
 import { logoutUser } from '../../actions/User';
 import { setNewModalNote } from '../../actions/NoteModal';
 import './index.scss';
 
 const Header: React.VFC = () => {
+    const [optionsVisible, setOptionsVisible] = useState(false);
     const dispatch = useAppDispatch();
     
+    const toggleOptionsMenu = () => {
+        setOptionsVisible(!optionsVisible);
+    }
+
     const onLogoutButtonClicked = () => {
         dispatch(logoutUser());
     }
@@ -30,10 +36,26 @@ const Header: React.VFC = () => {
                 aria-label='Add Note'
                 title='Add Note'
                 onClick={onAddNoteButtonClicked}
-                tabIndex={0}
+                focusable
             />
             <h1 className='text-center header__title'>Notes</h1>
             <NoteSearch />
+            <div className='header__options-wrapper'>
+                <IconButton
+                    className='header__options-button'
+                    icon={faCog}
+                    type='button'
+                    aria-label={`${optionsVisible ? 'Hide' : 'Show'} Options Menu`}
+                    title={`${optionsVisible ? 'Hide' : 'Show'} Options`}
+                    onClick={toggleOptionsMenu}
+                    focusable
+                />
+                {
+                    optionsVisible &&
+                    <OptionsDrowdown hideAction={() => setOptionsVisible(false)}/>
+                }
+            </div>
+            
             <button
                 className='header__logout-button'
                 type='button'

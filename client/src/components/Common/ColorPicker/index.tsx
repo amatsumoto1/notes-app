@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+import useClickOutside from '../../../hooks/useClickOutside';
 import './index.scss';
 
 const COLORS = [
@@ -15,7 +16,7 @@ const COLORS = [
 type Props = {
     defaultColor?: string
     selectColor: (color?: string) => void;
-    onClickOutside?: () => void;
+    onClickOutside: () => void;
 }
 
 const ColorPicker: React.VFC<Props> = ({ defaultColor, selectColor, onClickOutside }: Props) => {
@@ -36,19 +37,7 @@ const ColorPicker: React.VFC<Props> = ({ defaultColor, selectColor, onClickOutsi
         selectColor(e.currentTarget.name);
     }
 
-    const handleClickOutside = (e: MouseEvent) => {
-        if (ref.current && !ref.current.contains(e.target as Node) && onClickOutside) {
-            onClickOutside();
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        }
-    });
+    useClickOutside(ref, onClickOutside);
 
     return (
         <ul className='color-picker' ref={ref}>

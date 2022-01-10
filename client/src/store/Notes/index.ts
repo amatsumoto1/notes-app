@@ -21,7 +21,7 @@ const noteSlice = createSlice({
     name: 'notes',
     initialState: initialState,
     reducers: {
-        setAll: (state: NotesState, action: PayloadAction<{[id: number] : NoteModel}>) => {
+        setAll: (state: NotesState, action: PayloadAction<{[id: number]: NoteModel}>) => {
             state.notes = action.payload;
         },
         add: (state: NotesState, action: PayloadAction<NoteModel>) => {

@@ -1,0 +1,16 @@
+@import '../../../../styles/mixins';
+
+.tag-row {
+    display: flex;
+    margin-bottom: 0.3rem;
+
+    &__content {
+        @include no-outline-or-border();
+        background-color: inherit;
+        flex-grow: 1;
+    }
+
+    &__delete-button {
+        @include no-outline-or-border();
+    }
+}
