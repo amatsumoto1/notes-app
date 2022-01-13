@@ -76,13 +76,15 @@ export const NotesController = {
 
             const currentNote = await NoteModel.findByPk(id);
             if (currentNote) {
+                if (currentNote.userId !== userId) {
+                    return res.sendStatus(HttpCodes.Forbidden);
+                }
+
                 const updatedNote = await currentNote.update({
-                    id: id,
                     title: title,
                     content: content,
                     color: color,
                     favorite: !!favorite,
-                    userId: userId
                 });
                 const viewModel = mapToViewModel(updatedNote);
                 return res.status(HttpCodes.Ok).send({ note: viewModel });
@@ -108,7 +110,6 @@ export const NotesController = {
         const userId = req.user!.userId;
         try {
             const id = req.params.id;
-            console.log(id);
             const note = await NoteModel.findByPk(id);
             if (!note) {
                 return res.sendStatus(HttpCodes.NotFound);
