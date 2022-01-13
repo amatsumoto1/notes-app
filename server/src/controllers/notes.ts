@@ -2,7 +2,7 @@ import { NoteModel, NoteInstance } from '../models/notes';
 import { Request, Response } from 'express';
 import { HttpCodes } from '../constants/codes';
 
-interface NoteViewModel {
+interface NoteInfoViewModel {
     id: number,
     title?: string,
     content?: string,
@@ -10,7 +10,17 @@ interface NoteViewModel {
     favorite: boolean
 }
 
-const mapToViewModel = (note: NoteInstance): NoteViewModel => {
+interface NoteTagViewModel {
+    id: number,
+    tagId: number,
+    description?: string
+}
+
+interface NoteViewModel extends NoteInfoViewModel {
+    tags: NoteTagViewModel[]
+}
+
+const mapToViewModel = (note: NoteInstance): NoteInfoViewModel => {
     return {
         id: note.id,
         title: note.title === null ? undefined: note.title,
