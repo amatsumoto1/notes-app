@@ -6,13 +6,15 @@ const storageKey = 'user-state';
 
 export interface UserState {
     username?: string,
-    token?: string
+    token?: string,
+    refreshToken?: string
 }
 
 const initialState: UserState = 
     getState(storageKey) || {
     username: '',
-    token: ''
+    token: '',
+    refreshToken: ''
 }
 
 const userSlice = createSlice({
@@ -22,10 +24,12 @@ const userSlice = createSlice({
         login: (state: UserState, action: PayloadAction<UserState>) => {
             state.username = action.payload.username;
             state.token = action.payload.token;
+            state.refreshToken = action.payload.token;
         },
         logout: (state: UserState, action: PayloadAction) => {
             state.username = '';
             state.token = '';
+            state.refreshToken = '';
         }
     }
 });

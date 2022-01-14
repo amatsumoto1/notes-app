@@ -14,10 +14,11 @@ export const loginUser =  (username: string, password: string): AppThunk => {
                 password: password
             });
             if (res.status === 200) {
-                const { username, token } = res.data;
+                const { username, token, refreshToken } = res.data;
                 const userInfo = {
                     username: username,
-                    token: token
+                    token: token,
+                    refreshToken: refreshToken
                 };
 
                 saveState(userInfo, 'user-state');
