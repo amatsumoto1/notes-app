@@ -1,0 +1,38 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/variables';
+
+.add-tag-form {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+
+    .validated-input-container {
+        flex: 1;
+
+        input {
+            @include no-outline-or-border();   
+            border-bottom: 1px solid gray;
+            border-radius: 0;
+            background-color: inherit;
+
+            &:focus {
+                border-color: blue;
+            }
+        }
+    }
+
+    &__button {
+        @include no-outline-or-border();
+        @include colored-button($modal-color);
+        height: 25.375px;
+        width: 2rem;
+    }
+
+    &__clear-button {
+        color: red;
+    }
+
+    &__save-button {
+        color: green;
+    }
+}

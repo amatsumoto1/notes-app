@@ -30,7 +30,6 @@ export const TagModel = sequelize.define<TagInstance>(
         userId: {
             allowNull: false,
             type: DataTypes.NUMBER,
-            field: 'user_id',
             references: {
                 model: 'users',
                 key: 'id'

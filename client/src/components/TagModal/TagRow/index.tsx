@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import IconButton from '../../Common/IconButton';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
@@ -23,13 +23,13 @@ const TagRow: React.VFC<Props> = ({
         setContent(e.currentTarget.value);
     }
 
-    const onInputBlurred = () => {
+    const onInputBlurred = useCallback(() => {
         onUpdate(id, content);
-    }
+    }, [onUpdate, id, content]);
 
-    const onDeleteButtonClicked = () => {
+    const onDeleteButtonClicked = useCallback(() => {
         onDelete(id);
-    }
+    }, [onDelete, id]);
 
     return (
         <div className='tag-row'>

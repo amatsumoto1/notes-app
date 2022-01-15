@@ -11,16 +11,7 @@ export interface TagState {
 }
 
 const initialState: TagState = {
-    items: {
-        1: {
-            id: 1,
-            content: 'Test Content'
-        },
-        2: {
-            id: 2,
-            content: 'Test Content2'
-        }
-    }
+    items: {}
 }
 
 const tagSlice = createSlice({

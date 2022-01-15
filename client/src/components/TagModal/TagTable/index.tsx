@@ -1,17 +1,19 @@
 import React from 'react';
 import TagRow from '../TagRow';
 import { getTags } from '../../../store/Tags';
-import { useAppSelector } from '../../../hooks';
+import { deleteTag, updateTag } from '../../../actions/Tags';
+import { useAppSelector, useAppDispatch } from '../../../hooks';
 
 const TagTable: React.VFC = () => {
     const tags = useAppSelector(getTags);
+    const dispatch = useAppDispatch();
 
-    const updateTag = (id: number) => {
-
+    const updateTagItem = (id: number, content?: string) => {
+        dispatch(updateTag(id, content));
     }
 
-    const deleteTag = (id: number) => {
-
+    const deleteTagItem = (id: number) => {
+        dispatch(deleteTag(id));
     }
 
     return (
@@ -24,8 +26,8 @@ const TagTable: React.VFC = () => {
                                 key={id}
                                 id={tag.id}
                                 defaultContent={tag.content}
-                                onUpdate={updateTag}
-                                onDelete={deleteTag}
+                                onUpdate={updateTagItem}
+                                onDelete={deleteTagItem}
                             />
                 }
             ) }

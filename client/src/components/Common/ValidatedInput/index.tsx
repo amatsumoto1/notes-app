@@ -2,14 +2,14 @@ import React from 'react';
 import './index.scss';
 
 type ValidatedInputProps = {
-    name: string;
-    type?: string;
-    value?: string;
-    placeholder?: string;
-    autoComplete?: string;
-    required?: boolean;
-    error?: string;
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    name: string,
+    type?: string,
+    value?: string,
+    placeholder?: string,
+    autoComplete?: string,
+    required?: boolean,
+    error?: string,
+    onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
 export const ValidatedInput: React.FC<ValidatedInputProps> = (props: ValidatedInputProps) => {
@@ -24,13 +24,14 @@ export const ValidatedInput: React.FC<ValidatedInputProps> = (props: ValidatedIn
         onChange
     } = props;
 
-    const errorSectionId = `${name}-input-id-errors`;
+    const inputId = `${name.replace(' ', '-')}-input-id`;
+    const errorSectionId = `${inputId}-errors`;
 
     return (
         <div className='validated-input-container'>
             <div className='validated-input-wrapper'>
                 <input
-                    id={`${name}-input-id`}
+                    id={inputId}
                     name={name}
                     type={type}
                     value={value}
