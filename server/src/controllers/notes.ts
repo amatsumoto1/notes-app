@@ -1,6 +1,7 @@
 import { NoteModel, NoteInstance } from '../models/notes';
 import { Request, Response } from 'express';
 import { HttpCodes } from '../constants/codes';
+import { Op } from 'sequelize';
 
 interface NoteInfoViewModel {
     id: number,
@@ -34,7 +35,20 @@ export const NotesController = {
     getAllNotes: async (req: Request, res: Response): Promise<Response> => {
         const userId = req.user!.userId;
         try {
-            const notes = await NoteModel.findAll({ where: { userId: userId }});
+            const criteria = req.query.criteria || '';
+            const notes = await NoteModel.findAll({ 
+                where: {
+                    userId: userId,
+                    [Op.or]: {
+                        title: {
+                            [Op.like]: `%${criteria}%`
+                        },
+                        content: {
+                            [Op.like]: `%${criteria}%`
+                        }
+                    }
+                }
+            });
             const viewModels = notes.map(mapToViewModel);
             return res.status(HttpCodes.Ok).send({ notes: viewModels });
         }

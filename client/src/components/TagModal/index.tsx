@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from '../Common/Modal';
 import { getTagModalVisibility } from '../../store/TagModal';
 import { setTagModalVisibility } from '../../actions/TagModal';
+import { loadAllTags } from '../../actions/Tags';
 import TagSearch from './TagSearch';
 import TagTable from './TagTable';
 import AddTagForm from './AddTagForm';
@@ -15,6 +16,10 @@ const TagModal: React.VFC = () => {
     const onCloseButtonClicked = () => {
         dispatch(setTagModalVisibility(false));
     }
+
+    useEffect(() => {
+        dispatch(loadAllTags());
+    }, [visible, dispatch])
 
     return (
         <Modal className='tag-modal' visible={visible}>

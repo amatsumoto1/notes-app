@@ -1,6 +1,7 @@
 import { TagModel, TagInstance } from '../models/tags';
 import { Request, Response } from 'express';
 import { HttpCodes } from '../constants/codes';
+import { Op } from 'sequelize';
 
 export interface TagViewModel {
     id: number,
@@ -18,7 +19,15 @@ export const TagController = {
     getAllTags: async (req: Request, res: Response): Promise<Response> => {
         const userId = req.user!.userId;
         try {
-            const tags = await TagModel.findAll({ where: { userId: userId }});
+            const criteria = req.query.criteria || '';
+            const tags = await TagModel.findAll({
+                where: {
+                    userId: userId,
+                    content: {
+                        [Op.like]: `%${criteria}%`
+                    }
+                }
+            });
             const viewModels = tags.map(mapToViewModel);
             return res.status(HttpCodes.Ok).send({ tags: viewModels });
         }

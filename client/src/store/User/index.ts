@@ -30,11 +30,14 @@ const userSlice = createSlice({
             state.username = '';
             state.token = '';
             state.refreshToken = '';
+        },
+        setToken: (state: UserState, action: PayloadAction<string>) => {
+            state.token = action.payload;
         }
     }
 });
 
 export const isLoggedIn = (state: RootState) => !!state.user.token;
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setToken } = userSlice.actions;
 export default userSlice.reducer;

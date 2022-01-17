@@ -13,8 +13,8 @@ const NoteForm: React.VFC<Props> = ({
         defaultContent,
         onUpdate
     }: Props) => {
-    const [title, setTitle] = useState(defaultTitle);
-    const [content, setContent] = useState(defaultContent);
+    const [title, setTitle] = useState(defaultTitle || '');
+    const [content, setContent] = useState(defaultContent || '');
     
     const onTitleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value);

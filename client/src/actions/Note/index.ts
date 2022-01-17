@@ -2,10 +2,11 @@ import { AppThunk } from '../../store';
 import { NoteModel, setAll, add, update, remove } from '../../store/Notes';
 import { client } from '../../config/client';
 
-export const loadNotes = (): AppThunk => {
+export const loadNotes = (criteria?: string): AppThunk => {
     return async (dispatch, getState) => {
         try {
-            const res = await client.get('/notes');
+            const queryString = criteria ? `?criteria=${encodeURIComponent(criteria)}` : '';
+            const res = await client.get(`/notes${queryString}`);
             if (res.status === 200) {
                 const noteList = res.data.notes as NoteModel[];
                 const noteState: {[id: number]: NoteModel} = {};

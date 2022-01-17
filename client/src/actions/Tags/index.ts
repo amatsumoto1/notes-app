@@ -2,10 +2,11 @@ import { AppThunk } from '../../store';
 import { client } from '../../config/client';
 import { TagModel, setAll, add, update, remove } from '../../store/Tags';
 
-export const loadAllTags = (): AppThunk => {
+export const loadAllTags = (criteria?: string): AppThunk => {
     return async (dispatch, getState) => {
         try {
-            const res = await client.get('/tags');
+            const queryString = criteria ? `?criteria=${encodeURIComponent(criteria)}` : '';
+            const res = await client.get(`/tags${queryString}`);
             if (res.status === 200) {
                 const tagList = res.data.tags as TagModel[];
                 const tagState: {[id: string]: TagModel} = {};
