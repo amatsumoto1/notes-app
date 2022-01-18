@@ -1,9 +1,11 @@
 import { AppThunk } from '../../store';
 import { NoteModel, setAll, add, update, remove } from '../../store/Notes';
+import { setLoading } from '../../store/Loading';
 import { client } from '../../config/client';
 
 export const loadNotes = (criteria?: string): AppThunk => {
     return async (dispatch, getState) => {
+        dispatch(setLoading(true));
         try {
             const queryString = criteria ? `?criteria=${encodeURIComponent(criteria)}` : '';
             const res = await client.get(`/notes${queryString}`);
@@ -20,7 +22,8 @@ export const loadNotes = (criteria?: string): AppThunk => {
         }
         catch (err) {
             console.log(err);
-        }    
+        }
+        dispatch(setLoading(false));
     }
 }
 
@@ -47,6 +50,7 @@ export const setNoteColor = (id: number, color?: string): AppThunk => {
 
 export const removeNote = (id: number): AppThunk => {
     return async (dispatch, getState) => {
+        dispatch(setLoading(true));
         try {
             const res = await client.delete(`/notes/${id}`);
             if (res.status === 204) {
@@ -56,5 +60,7 @@ export const removeNote = (id: number): AppThunk => {
         catch (err) {
             console.log(err);
         }
+        dispatch(setLoading(false));
+
     }
 }

@@ -22,7 +22,7 @@ const SearchBar: React.VFC<Props> = ({
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            setSearchInput(e.currentTarget.value);
+            search(searchInput);
         }
     }
 

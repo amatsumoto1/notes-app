@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Modal from '../Common/Modal';
 import NoteForm from './NoteForm';
 import IconButton from '../Common/IconButton';
@@ -23,15 +23,15 @@ const NoteModal: React.VFC = () => {
         dispatch(setNoteModalVisible(false));
     }
 
-    const onColorPickerButtonSelected = () => {
+    const onColorPickerButtonSelected = useCallback(() => {
         setShowColorPicker(true);
-    }
+    }, []);
 
     const onColorPickerSetInactive = () => {
         setShowColorPicker(false);
     }
 
-    const updateNoteContents = (title?: string, content?: string) => {
+    const updateNoteContents = useCallback((title?: string, content?: string) => {
         if (!note) {
             return;
         }
@@ -43,7 +43,7 @@ const NoteModal: React.VFC = () => {
         }
 
         dispatch(updateNoteModalNote(updatedNote));
-    }
+    }, [dispatch, note]);
 
     const updateNoteColor = (color?: string) => {
         if (!note) {

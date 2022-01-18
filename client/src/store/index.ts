@@ -5,6 +5,7 @@ import noteModalReducer from './NoteModal';
 import userReducer from './User';
 import tagModalReducer from './TagModal';
 import tagReducer from './Tags';
+import loadingReducer from './Loading';
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     noteModal: noteModalReducer,
     tagModal: tagModalReducer,
     tags: tagReducer,
-    user: userReducer
+    user: userReducer,
+    loading: loadingReducer
   },
 });
 
