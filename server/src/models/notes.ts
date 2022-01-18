@@ -39,7 +39,6 @@ export const NoteModel = sequelize.define<NoteInstance>(
         userId: {
             allowNull: false,
             type: DataTypes.NUMBER,
-            field: 'user_id',
             references: {
                 model: 'users',
                 key: 'id'

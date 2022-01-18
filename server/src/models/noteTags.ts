@@ -28,7 +28,6 @@ export const NoteTagModel = sequelize.define<NoteTagInstance>(
         userId: {
             allowNull: false,
             type: DataTypes.NUMBER,
-            field: 'user_id',
             references: {
                 model: 'users',
                 key: 'id'
@@ -37,7 +36,6 @@ export const NoteTagModel = sequelize.define<NoteTagInstance>(
         noteId: {
             allowNull: false,
             type: DataTypes.NUMBER,
-            field: 'note_id',
             references: {
                 model: 'notes',
                 key: 'id'
@@ -46,7 +44,6 @@ export const NoteTagModel = sequelize.define<NoteTagInstance>(
         tagId: {
             allowNull: false,
             type: DataTypes.NUMBER,
-            field: 'tags_id',
             references: {
                 model: 'tags',
                 key: 'id'
